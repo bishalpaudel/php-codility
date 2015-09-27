@@ -81,25 +81,14 @@ function solution($A)
 	// "The size of a float is platform-dependent, although a maximum of ~1.8e308 with a precision 
 	// of roughly 14 decimal digits is a common value (the 64 bit IEEE format)."
 
-	$N = count($A);
-	$permutationSum = ((float)$N * ($N + 1)) / 2;
-	$actualSum = array_sum($A);
-	// if permuation sum does not match actual sum, we don't have permuation
-	$diff = (int)($permutationSum - $actualSum);
-	if($diff != 0)
-		return 0;
-
-	// now, [2, 2, 2, 4] gives the sum of 10, like [1 2 3 4], 
-	// but first array is not permuationt, and second one is, so we check that all numbers are unique
-	$uniqueA = array();
-	foreach($A as $key => $number) 
-	{
-		if(empty($uniqueA[$number]))
-			$uniqueA[$number] = 1;
-		// if number is repeated
-		else
-			return 0;
-	}
-
-	return 1;
+    $B = array_fill(1, count($A), -1);
+    
+    foreach($A as $a)
+    {
+        $B[$a] = $a;
+    }
+        
+    if(array_search(-1, $B))
+        return 0;
+    return 1;
 }
